@@ -35,11 +35,15 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("player"):
 		player_in_range = true
 		print("player in")
+	else:
+		pass
 		
 func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("player"):
 		player_in_range = false
 		print("player left")
+	else:
+		pass
 
 func player_attack():
 	if player_in_range:
@@ -48,5 +52,5 @@ func player_attack():
 		print(health)
 
 func damage_dealt():
-	if player_in_range and global.player_atk_rn ==True:
+	if player_in_range and global.player_atk_rn == true:
 		health-=20
