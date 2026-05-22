@@ -11,8 +11,21 @@ config_version=5
 [application]
 
 config/name="cooking it up"
+run/main_scene="uid://coq0qllxf8qq8"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+global="*uid://bmrvb83bjs0le"
+
+[display]
+
+window/stretch/scale=1.5
+
+[editor]
+
+version_control/autoload_on_startup=true
 
 [editor_plugins]
 
