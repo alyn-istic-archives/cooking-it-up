@@ -345,7 +345,6 @@ radius = 31.144823
 y_sort_enabled = true
 position = Vector2(107, 91)
 collision_layer = 2
-collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_g2els")
 
@@ -371,20 +370,19 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="hitbox" type="Area2D" parent="." unique_id=1675732914]
-collision_layer = 8
-collision_mask = 4
+collision_layer = 2
 
 [node name="dmg_area" type="CollisionShape2D" parent="hitbox" unique_id=2008528075]
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_qhqgy")
 
 [node name="dmg_dealt_cooldown" type="Timer" parent="." unique_id=109185686]
-wait_time = 1.5
+wait_time = 2.0
 
 [node name="deal_atk_timer" type="Timer" parent="." unique_id=600213537]
 wait_time = 0.75
 
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]
-[connection signal="timeout" from="dmg_dealt_cooldown" to="." method="_on_dmg_dealt_cooldown_timeout"]
+[connection signal="timeout" from="dmg_dealt_cooldown" to="." method="_on_cooldown_timeout"]
 [connection signal="timeout" from="deal_atk_timer" to="." method="_on_deal_atk_timer_timeout"]

@@ -1,47 +1,24 @@
 extends CharacterBody2D
-#
-#
-#const SPEED = 300.0
-#const JUMP_VELOCITY = -400.0
-#
-#
-#func _physics_process(delta: float) -> void:
-	## Add the gravity.
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-#
-	## Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-#
-	## Get the input direction and handle the movement/deceleration.
-	## As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction := Input.get_axis("ui_left", "ui_right")
-	#if direction:
-		#velocity.x = direction * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-#
-	#move_and_slide()
-	
+
 
 var direction = "none"
 var enemy_in_range = false
-var atk_cooldown = true
+var taking_damage = true
 var health = 100
 var alive = true
+var atk_prog = false
+
 
 const speed = 200
 
-func ready():
-	$AnimatedSprite2D.play("front_idle")
 
 func player():
 	pass
 
 func _physics_process(delta):
 	player_movement(delta)
-	enemy_attack()
+	damage_dealt()
+	player_attack()
 	if health <=0:
 		health = 0
 		print("pk")
@@ -83,14 +60,17 @@ func play_anim(movement):
 			1:
 				anim.play("side_walk")
 			0:
-				anim.play("side_idle")
+				if atk_prog == false:
+					anim.play("side_idle")
+
 	if dir == "left":
 		anim.flip_h=false
 		match movement:
 			1:
 				anim.play("side_walk")
 			0:
-				anim.play("side_idle")
+				if atk_prog == false:
+					anim.play("side_idle")
 	if dir == "up":
 		match movement:
 			1:
@@ -102,25 +82,73 @@ func play_anim(movement):
 			1:
 				anim.play("front_walk")
 			0:
-				anim.play("front_idle")
+				if atk_prog == false:
+					anim.play("front_idle")
+
+
+
+func damage_dealt():
+	if enemy_in_range == true and taking_damage == true:
+		health -= 20
+		taking_damage = false
+		$dmg_dealt_cooldown.start()
+		print(health)
+
+
+
+func player_attack():
+	var dir = direction
+	
+	if Input.is_action_just_pressed("attack"):
+		global.player_atk_rn = true
+		atk_prog = true
+		print("attack?")
+		match (dir):
+			"right":
+				$AnimatedSprite2D.flip_h=true;
+				$AnimatedSprite2D.play("side_atk")
+				$deal_atk_timer.start()
+			"left":
+				$AnimatedSprite2D.flip_h=false;
+				$AnimatedSprite2D.play("side_atk")
+				$deal_atk_timer.start()
+			"down":
+				$AnimatedSprite2D.play("front_atk")
+				$deal_atk_timer.start()
+			"up":
+				$AnimatedSprite2D.play("front_atk")
+				$deal_atk_timer.start()
+				
+	
+
+func _on_deal_atk_timer_timeout() -> void:
+	$deal_atk_timer.stop()
+	global.player_atk_rn = false
+	atk_prog = false
+#
+#
+
+
+func _on_hitbox_area_shape_exited(body: Node2D) -> void:
+	if (body.has_method("enemy")):
+		print("enemy out")
+		enemy_in_range = false # Replace with function body.
+	else:
+		pass
+
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemy_in_range = true
-		print("enemy in")
-		
+
+
+
+
 func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemy_in_range = false
-		print("enemy left")
-
-func enemy_attack():
-	if enemy_in_range and atk_cooldown == true:
-		health -= 20
-		atk_cooldown = false
-		$cooldown.start()
-		print(health)
 
 
-func _on_cooldown_timeout() -> void:
-	atk_cooldown= true
+func _on_dmg_dealt_cooldown_timeout() -> void:
+	taking_damage = true
+	damage_dealt()

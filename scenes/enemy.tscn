@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://douvw7y6bjom0" path="res://scripts/enemy.gd" id="1_7p1mj"]
 [ext_resource type="Texture2D" uid="uid://cjoicp4y5tgwh" path="res://art/enemy.png" id="2_md0e3"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ra3w"]
+radius = 14.3178215
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ra3w"]
 atlas = ExtResource("2_md0e3")
 region = Rect2(0, 0, 48, 48)
@@ -56,39 +59,45 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
 radius = 121.19818
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4ra3w"]
-radius = 14.035668
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_5uy6h"]
 radius = 29.0
 
 [node name="enemy" type="CharacterBody2D" unique_id=2077439078]
-collision_layer = 2
+collision_layer = 4
+collision_mask = 3
+motion_mode = 1
 script = ExtResource("1_7p1mj")
+
+[node name="interaction" type="CollisionShape2D" parent="." unique_id=1675221098]
+shape = SubResource("CircleShape2D_4ra3w")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=672375268]
 sprite_frames = SubResource("SpriteFrames_ipns3")
 animation = &"walk"
-frame_progress = 0.8977318
+frame = 1
+frame_progress = 0.0021073695
 
 [node name="detection_area" type="Area2D" parent="." unique_id=1977834466]
 visible = false
-collision_layer = 2
+collision_layer = 16
+collision_mask = 10
 
 [node name="det_area" type="CollisionShape2D" parent="detection_area" unique_id=1518504692]
 shape = SubResource("CircleShape2D_md0e3")
 
-[node name="interaction" type="CollisionShape2D" parent="." unique_id=1675221098]
-visible = false
-shape = SubResource("CircleShape2D_4ra3w")
-
 [node name="hitbox" type="Area2D" parent="." unique_id=9676636]
 visible = false
+collision_layer = 16
+collision_mask = 10
 
 [node name="dmg_area" type="CollisionShape2D" parent="hitbox" unique_id=803003660]
 shape = SubResource("CircleShape2D_5uy6h")
+
+[node name="hurt_cooldown" type="Timer" parent="." unique_id=133918851]
+wait_time = 0.5
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="hurt_cooldown" to="." method="_on_hurt_cooldown_timeout"]

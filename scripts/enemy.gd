@@ -6,30 +6,35 @@ var player = null
 var player_chase = false
 var health = 100
 var player_in_range = false
+var taking_damage = true
+
 
 func _physics_process(delta):
-	if player_chase and (player):
-		position += (player.position-position).normalized() * speed * delta
-		move_and_collide(Vector2(0,0))
+	damage_dealt()
+	if player_chase and is_instance_valid(player):
+		var dir = (player.position-position).normalized()
+		velocity = dir*speed
 		$AnimatedSprite2D.play("walk")
-		
 		if(player.position.x - position.x)<0:
 			$AnimatedSprite2D.flip_h=true
 		else:
 			$AnimatedSprite2D.flip_h=false
+	else:
+		velocity = Vector2.ZERO
+	move_and_slide()
 		
 func enemy():
 	pass
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	player_chase = true
-	player = body
+	if body.has_method("player"):
+		player_chase = true
+		player = body
 
-func _on_detection_area_body_exited() -> void:
-	player_chase = false
-	player = null
-
-
+func _on_detection_area_body_exited(body: Node2D) -> void:
+	if body.has_method("player"):
+		player_chase = false
+		player = null
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("player"):
@@ -45,12 +50,14 @@ func _on_hitbox_body_exited(body: Node2D) -> void:
 	else:
 		pass
 
-func player_attack():
-	if player_in_range:
-		health -= 20
-		$cooldown.start()
-		print(health)
-
 func damage_dealt():
-	if player_in_range and global.player_atk_rn == true:
+	if player_in_range and global.player_atk_rn and taking_damage == true:
 		health-=20
+		$hurt_cooldown.start()
+		taking_damage = false
+		print("slime health =", health)
+		if health <= 0:
+			self.queue_free()
+
+func _on_hurt_cooldown_timeout() -> void:
+	taking_damage = true;

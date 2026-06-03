@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d1vemix1h40xl" path="res://art/spritesheet.png" id="2_qhqgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
-radius = 16.0
+radius = 9.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("2_qhqgy")
@@ -197,7 +197,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"back_walk",
-"speed": 12.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -343,48 +343,37 @@ radius = 31.144823
 
 [node name="player" type="CharacterBody2D" unique_id=244424078]
 y_sort_enabled = true
-position = Vector2(107, 91)
-collision_layer = 2
-collision_mask = 5
-motion_mode = 1
 script = ExtResource("1_g2els")
 
 [node name="interaction" type="CollisionShape2D" parent="." unique_id=1919049347]
-position = Vector2(-1, -1)
+position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=652024352]
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_bwjto")
-animation = &"front_idle"
+animation = &"back_walk"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=333146540]
+visible = false
 position = Vector2(2, 2)
-zoom = Vector2(3, 3)
-limit_enabled = false
-limit_left = 0
-limit_top = 0
-limit_right = 540
-limit_bottom = 192
-limit_smoothed = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
+zoom = Vector2(2, 2)
 
 [node name="hitbox" type="Area2D" parent="." unique_id=1675732914]
-collision_layer = 8
-collision_mask = 4
+visible = false
+collision_mask = 2
 
 [node name="dmg_area" type="CollisionShape2D" parent="hitbox" unique_id=2008528075]
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_qhqgy")
 
-[node name="dmg_dealt_cooldown" type="Timer" parent="." unique_id=109185686]
-wait_time = 1.5
+[node name="cooldown" type="Timer" parent="." unique_id=109185686]
+wait_time = 0.5
 
 [node name="deal_atk_timer" type="Timer" parent="." unique_id=600213537]
-wait_time = 0.75
+wait_time = 0.5
 
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]
-[connection signal="timeout" from="dmg_dealt_cooldown" to="." method="_on_dmg_dealt_cooldown_timeout"]
+[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]
 [connection signal="timeout" from="deal_atk_timer" to="." method="_on_deal_atk_timer_timeout"]
