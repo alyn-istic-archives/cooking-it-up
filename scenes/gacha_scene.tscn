@@ -1,54 +1,126 @@
-[gd_scene load_steps=2 format=3 uid="uid://ilv08b12mfm8"]
+[gd_scene format=3 uid="uid://ilv08b12mfm8"]
 
 [ext_resource type="Script" uid="uid://6y2v83qfywu7" path="res://scripts/gacha.gd" id="1_j7t8q"]
+[ext_resource type="Texture2D" uid="uid://cjoicp4y5tgwh" path="res://art/enemy.png" id="2_ocqmj"]
 
-[node name="GachaScene" type="CanvasLayer"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cm48"]
+atlas = ExtResource("2_ocqmj")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks0hb"]
+atlas = ExtResource("2_ocqmj")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_my3l4"]
+atlas = ExtResource("2_ocqmj")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vhwk"]
+atlas = ExtResource("2_ocqmj")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t138g"]
+atlas = ExtResource("2_ocqmj")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2w2d2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cm48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ks0hb")
+}],
+"loop": true,
+"name": &"Bread",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cm48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_my3l4")
+}],
+"loop": true,
+"name": &"Ham",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cm48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vhwk")
+}],
+"loop": true,
+"name": &"Lettuce",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cm48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t138g")
+}],
+"loop": true,
+"name": &"Tomato",
+"speed": 5.0
+}]
+
+[node name="GachaScene" type="CanvasLayer" unique_id=1084116209]
+process_mode = 3
 script = ExtResource("1_j7t8q")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=422599321]
+root_node = NodePath("")
 
-[node name="Panel" type="Panel" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 536.0
-offset_top = 284.0
-offset_right = 576.0
-offset_bottom = 324.0
+[node name="Panel" type="Panel" parent="." unique_id=1499415606]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=397093815]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 46.0
+offset_top = 49.0
+offset_right = 1092.0
+offset_bottom = 632.0
 
-[node name="ResultLabel" type="Label" parent="Control/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="ResultLabel" type="Label" parent="Panel/VBoxContainer" unique_id=929662516]
+layout_mode = 2
+text = "TEST"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ItemNameLabel" type="Label" parent="Control/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="ItemNameLabel" type="Label" parent="Panel/VBoxContainer" unique_id=320390450]
+layout_mode = 2
+text = "INGREDIENT NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="RarityLabel" type="Label" parent="Control/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="RarityLabel" type="Label" parent="Panel/VBoxContainer" unique_id=2127619400]
+layout_mode = 2
+text = "RARITY:"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ContinueButton" type="Button" parent="Control/Panel"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="ContinueButton" type="Button" parent="Panel/VBoxContainer" unique_id=1761331059]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.0
+text = "CONTINUE"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Control")
+[node name="Sprite" type="AnimatedSprite2D" parent="Panel/VBoxContainer" unique_id=1521851597]
+position = Vector2(527, 168)
+scale = Vector2(4.625, 4.1875)
+sprite_frames = SubResource("SpriteFrames_2w2d2")
+animation = &"Tomato"
+frame_progress = 0.85571885
+
+[connection signal="pressed" from="Panel/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://5p2pvslx25f"]
+[gd_scene format=3 uid="uid://5p2pvslx25f"]
 
 [ext_resource type="Script" uid="uid://douvw7y6bjom0" path="res://scripts/enemy.gd" id="1_7p1mj"]
 [ext_resource type="Texture2D" uid="uid://cjoicp4y5tgwh" path="res://art/enemy.png" id="2_md0e3"]
@@ -62,42 +62,45 @@ radius = 121.198
 [sub_resource type="CircleShape2D" id="CircleShape2D_5uy6h"]
 radius = 29.0
 
-[node name="enemy" type="CharacterBody2D"]
+[node name="enemy" type="CharacterBody2D" unique_id=1003717642]
 collision_layer = 4
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_7p1mj")
 
-[node name="interaction" type="CollisionShape2D" parent="."]
+[node name="interaction" type="CollisionShape2D" parent="." unique_id=1021926442]
 shape = SubResource("CircleShape2D_4ra3w")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1420902746]
 sprite_frames = SubResource("SpriteFrames_ipns3")
 animation = &"walk"
 frame = 1
 frame_progress = 0.00210737
 
-[node name="detection_area" type="Area2D" parent="."]
+[node name="detection_area" type="Area2D" parent="." unique_id=1054967552]
 visible = false
 collision_layer = 16
 collision_mask = 10
 
-[node name="det_area" type="CollisionShape2D" parent="detection_area"]
+[node name="det_area" type="CollisionShape2D" parent="detection_area" unique_id=8011951]
 shape = SubResource("CircleShape2D_md0e3")
 
-[node name="hitbox" type="Area2D" parent="."]
+[node name="hitbox" type="Area2D" parent="." unique_id=1912493382]
 visible = false
 collision_layer = 16
 collision_mask = 10
 
-[node name="dmg_area" type="CollisionShape2D" parent="hitbox"]
+[node name="dmg_area" type="CollisionShape2D" parent="hitbox" unique_id=1890984007]
 shape = SubResource("CircleShape2D_5uy6h")
 
-[node name="hurt_cooldown" type="Timer" parent="."]
+[node name="hurt_cooldown" type="Timer" parent="." unique_id=1947212077]
 wait_time = 0.5
+
+[node name="respawn" type="Timer" parent="." unique_id=2084466258]
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]
 [connection signal="timeout" from="hurt_cooldown" to="." method="_on_hurt_cooldown_timeout"]
+[connection signal="timeout" from="respawn" to="." method="_on_respawn_timeout"]

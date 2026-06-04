@@ -11,6 +11,7 @@ var current_wave: int
 var start_nodes: int
 var current_nodes: int
 var wave_over
+var enemy_present= 1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,27 +21,31 @@ func _ready() -> void:
 	start_nodes = get_child_count()
 	current_nodes = get_child_count()
 	position_next_wave()
+	$SceneTransitionAnimation/animation_player.play("scene_change")
+	
+	signalBus.enemy_died.connect(_on_enemy_died)
+	$enemy_respawn.start()
+	signalBus.gacha_end.connect(_on_gacha_end)
+	signalBus.cooking_done.connect(_on_cooking_end)
 
-func _connect_enemy_signal() -> void:
-	for child in get_children():
-		if child.has_signal("enemy_died"):
-			print("found enemy dead")
-			child.enemy_died.connect(_on_enemy_died)
 	
 func _on_enemy_died() -> void:
 	print("dead enemy method")
 	get_tree().paused = true
 	
 	var gacha = gacha_scene.instantiate()
-	gacha.ingredient_awarded.connect(_on_gacha_end)
+	gacha.ingredient_won.connect(_on_gacha_end)
 	add_child(gacha)
+	
+	enemy_present = 0
+	
 	
 func _on_gacha_end(ingredient:Dictionary) ->void:
 	global.add_ingredient(ingredient["name"])
 	get_tree().paused = false
 	print(ingredient["name"])
 	
-	if global.total_ingredients() >= global.COOKING_TRIGGER_COUNT:
+	if global.current_count == global.COOK_TRIG_COUNT:
 		await get_tree().create_timer(0.3).timeout
 		get_tree().paused = true
 		var cooking = cooking_scene.instantiate()
@@ -63,3 +68,13 @@ func position_next_wave():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+
+func _on_enemy_respawn_timeout() -> void:
+	if (get_tree().paused==false and enemy_present == 0):
+		var e_scene = enemy_scene.instantiate()
+		e_scene.enemy_died.connect(_on_enemy_died)
+		add_child(e_scene)
+		enemy_present = 1
+		e_scene.global_position= Vector2( -50, 100)
+	

@@ -102,7 +102,7 @@ func player_attack():
 	if Input.is_action_just_pressed("attack"):
 		global.player_atk_rn = true
 		atk_prog = true
-		print("attack?")
+		health+=10
 		match (dir):
 			"right":
 				$AnimatedSprite2D.flip_h=true;

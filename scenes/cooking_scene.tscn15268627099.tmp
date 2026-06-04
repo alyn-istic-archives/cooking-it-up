@@ -50,26 +50,6 @@ text = "RECIPES:"
 
 [node name="recipe_list" type="Label" parent="RecipePanel/VBoxContainer" unique_id=1832763508]
 layout_mode = 2
-text = "
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"
-paragraph_separator = "\\t"
-text_overrun_behavior = 2
 
 [node name="MinigamePanel" type="Panel" parent="." unique_id=29601601]
 visible = false

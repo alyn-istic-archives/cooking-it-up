@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://bsadyiws0rryc"]
+
+[ext_resource type="Script" uid="uid://diwqd0oyb0g06" path="res://scripts/cooking.gd" id="1_gl1qf"]
+
+[node name="CookingScene" type="CanvasLayer" unique_id=2093729249]
+script = ExtResource("1_gl1qf")
+
+[node name="RecipePanel" type="Panel" parent="." unique_id=1076482013]
+visible = false
+offset_right = 352.0
+offset_bottom = 134.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RecipePanel" unique_id=1547442614]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="choose_recipe" type="Label" parent="RecipePanel/VBoxContainer" unique_id=178461363]
+layout_mode = 2
+
+[node name="list" type="Label" parent="RecipePanel/VBoxContainer" unique_id=1832763508]
+layout_mode = 2
+
+[node name="skip" type="Button" parent="RecipePanel/VBoxContainer" unique_id=1561419888]
+layout_mode = 2
+
+[node name="MinigamePanel" type="Panel" parent="." unique_id=29601601]
+offset_left = 580.0
+offset_top = 40.0
+offset_right = 620.0
+offset_bottom = 80.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MinigamePanel" unique_id=119393841]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Instruction" type="Label" parent="MinigamePanel/VBoxContainer" unique_id=612091422]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="MinigamePanel/VBoxContainer" unique_id=1999635098]
+
+[node name="ProgressBar" type="ProgressBar" parent="MinigamePanel/VBoxContainer" unique_id=1816948020]
+layout_mode = 2
+max_value = 5.0
+
+[node name="CHOP" type="Button" parent="MinigamePanel/VBoxContainer" unique_id=720352016]
+layout_mode = 2
+
+[node name="Result" type="Panel" parent="." unique_id=300415917]
+visible = false
+offset_left = 580.0
+offset_top = 40.0
+offset_right = 620.0
+offset_bottom = 80.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Result" unique_id=1599706073]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BuffLabel" type="Label" parent="Result/VBoxContainer" unique_id=1186205640]
+layout_mode = 2
+
+[node name="DishNameLabel" type="Label" parent="Result/VBoxContainer" unique_id=916200844]
+layout_mode = 2
+
+[node name="EAT" type="Button" parent="Result/VBoxContainer" unique_id=1692860362]
+layout_mode = 2
+
+[connection signal="pressed" from="RecipePanel/VBoxContainer/skip" to="." method="_on_skip_button_pressed"]
+[connection signal="pressed" from="MinigamePanel/VBoxContainer/CHOP" to="." method="_on_chop_pressed"]
+[connection signal="pressed" from="Result/VBoxContainer/EAT" to="." method="_on_eat_pressed"]

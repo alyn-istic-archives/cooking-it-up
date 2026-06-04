@@ -1,14 +1,52 @@
 [gd_scene format=3 uid="uid://yfllgmt88b8o"]
 
-[node name="SceneTransitionAnimation" type="Node2D"]
+[sub_resource type="Animation" id="Animation_v3its"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[sub_resource type="Animation" id="Animation_b3cbm"]
+resource_name = "scene_change"
+length = 2.8333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.04, 1, 2.77),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.42352942), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jm1ho"]
+_data = {
+&"RESET": SubResource("Animation_v3its"),
+&"scene_change": SubResource("Animation_b3cbm")
+}
+
+[node name="SceneTransitionAnimation" type="Node2D" unique_id=1162941722]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1303769214]
 z_index = 10
-offset_left = -858.0
-offset_top = -616.0
-offset_right = 3037.0
-offset_bottom = 1486.0
+offset_left = -1487.0
+offset_top = -1582.0
+offset_right = 6488.0
+offset_bottom = 2303.0
 color = Color(0, 0, 0, 0)
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=1333835760]
+libraries/ = SubResource("AnimationLibrary_jm1ho")
 speed_scale = 2.808

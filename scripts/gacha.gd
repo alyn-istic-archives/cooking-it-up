@@ -8,7 +8,9 @@ var can_dismiss  = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	print("going to roll gacha")
 	result = global.roll_gacha()
+	print("rolled gacha...")
 	_roll_animation()# Replace with function body.
 
 func _roll_animation()-> void:
@@ -23,48 +25,58 @@ func _roll_animation()-> void:
 	#_result()
 	
 	#func _play_roll_animation() -> void:
-	$Panel/ResultLabel.text = "Rolling..."
-	$Panel/ItemNameLabel.visible = false
-	$Panel/RarityLabel.visible = false
-	$Panel/ContinueButton.visible = false
+	$Panel/VBoxContainer/ResultLabel.text = "Rolling..."
+	$Panel/VBoxContainer/ItemNameLabel.visible = false
+	$Panel/VBoxContainer/RarityLabel.visible = false
+	$Panel/VBoxContainer/ContinueButton.visible = false
+	$Panel/VBoxContainer/Sprite.visible = false
 	# Fake spinning text
 	for i in range(8):
-		var fake = global.INGREDIENT_POOL[randi() % global.INGREDIENT_POOL.size()]
-		$Panel/ItemNameLabel.text = fake["name"]
-		$Panel/ItemNameLabel.visible = true
+		var fake = global.ING_POOL[randi() % global.ING_POOL.size()]
+		$Panel/VBoxContainer/ItemNameLabel.text = fake["name"]
+		$Panel/VBoxContainer/ItemNameLabel.visible = true
 		await get_tree().create_timer(0.18).timeout
 	_result()
 	
 func _result() -> void:
 	$AnimationPlayer.play("reveal")
 	
-	$Panel/ResultLabel.text = "You got:"
-	$Panel/ItemNameLabel.text = result["name"]
-	$Panel/ItemNameLabel.visible = true
+	$Panel/VBoxContainer/ResultLabel.text = "You got:"
+	$Panel/VBoxContainer/ItemNameLabel.text = result["name"]
+	$Panel/VBoxContainer/ItemNameLabel.visible = true
 	
 	var rarity = result["rarity"]
-	$Panel/RarityLabel.text = rarity.to_upper()
-	$Panel/RarityLabel.visible = true
+	$Panel/VBoxContainer/RarityLabel.text = rarity.to_upper()
+	$Panel/VBoxContainer/RarityLabel.visible = true
+	
+	$Panel/VBoxContainer/Sprite.visible = true
+	$Panel/VBoxContainer/Sprite.play(result["name"])
 	
 	match rarity:
-		"common":    $Panel/RarityLabel.add_theme_color_override("font_color", Color.WHITE)
-		"rare":      $Panel/RarityLabel.add_theme_color_override("font_color", Color.CYAN)
+		"common":    $Panel/VBoxContainer/RarityLabel.add_theme_color_override("font_color", Color.WHITE)
+		"rare":      $Panel/VBoxContainer/RarityLabel.add_theme_color_override("font_color", Color.CYAN)
 	await get_tree().create_timer(0.5).timeout
-	$Panel/ContinueButton.visible = true
+	$Panel/VBoxContainer/ContinueButton.visible = true
 	can_dismiss = true
-	
-	
-func continue_button_press() -> void:
-	if not can_dismiss:
-		return
-	ingredient_won.emit(result)
-	queue_free()
+
 	
 func _input(event: InputEvent)-> void:
 	if can_dismiss and event.is_action_pressed("ui_accept"):
-		continue_button_press()
+		_on_continue_button_pressed()
 		# Called every frame. 'delta' is the elapsed time since the previous frame.
 
 
 func _process(delta: float) -> void:
 	pass
+
+
+func _on_continue_button_pressed() -> void:
+	if can_dismiss:
+		$Panel/VBoxContainer/ItemNameLabel.visible = false
+		$Panel/VBoxContainer/RarityLabel.visible = false
+		$Panel/VBoxContainer/ContinueButton.visible = false
+		$Panel/VBoxContainer/ContinueButton.visible = false
+		$Panel/VBoxContainer/Sprite.visible = false
+		$Panel.visible = false
+		signalBus.gacha_end.emit(result)
+		return#

@@ -65,6 +65,6 @@ func _on_hurt_cooldown_timeout() -> void:
 
 func die():
 	print("enemy: bleh")
-	enemy_died.emit(global_position)
+	signalBus.enemy_died.emit()
 	queue_free()
 	
