@@ -12,16 +12,12 @@ config_version=5
 
 config/name="cooking it up"
 run/main_scene="uid://coq0qllxf8qq8"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 global="*uid://bmrvb83bjs0le"
-
-[display]
-
-window/stretch/scale=0.5
 
 [editor]
 
