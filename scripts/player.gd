@@ -15,8 +15,8 @@ const speed = 200
 func player():
 	pass
 
-func _physics_process(delta):
-	player_movement(delta)
+func _physics_process(_delta):
+	player_movement(_delta)
 	damage_dealt()
 	player_attack()
 	if health <=0:
@@ -24,7 +24,7 @@ func _physics_process(delta):
 		print("pk")
 		alive=false
 		self.queue_free()
-func player_movement(delta):
+func player_movement(_delta):
 	if (Input.is_action_pressed("ui_right")):
 		play_anim(1)
 		direction = "right"

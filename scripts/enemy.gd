@@ -8,8 +8,9 @@ var health = 100
 var player_in_range = false
 var taking_damage = true
 
+signal enemy_died(enemy_position: Vector2)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	damage_dealt()
 	if player_chase and is_instance_valid(player):
 		var dir = (player.position-position).normalized()
@@ -57,7 +58,13 @@ func damage_dealt():
 		taking_damage = false
 		print("slime health =", health)
 		if health <= 0:
-			self.queue_free()
+			die()
 
 func _on_hurt_cooldown_timeout() -> void:
 	taking_damage = true;
+
+func die():
+	print("enemy: bleh")
+	enemy_died.emit(global_position)
+	queue_free()
+	
