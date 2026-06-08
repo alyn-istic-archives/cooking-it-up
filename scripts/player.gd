@@ -4,7 +4,7 @@ extends CharacterBody2D
 var direction = "none"
 var enemy_in_range = false
 var taking_damage = true
-var health = 100
+var health = global.max_health
 var alive = true
 var atk_prog = false
 
@@ -14,6 +14,8 @@ const speed = 200
 
 func player():
 	pass
+func _ready() -> void:
+	signalBus.enemy_died.connect(_on_enemy_died)
 
 func _physics_process(_delta):
 	player_movement(_delta)
@@ -24,6 +26,10 @@ func _physics_process(_delta):
 		print("pk")
 		alive=false
 		self.queue_free()
+		
+func _on_enemy_died():
+	health = global.max_health
+	print("player health:", health)
 func player_movement(_delta):
 	if (Input.is_action_pressed("ui_right")):
 		play_anim(1)
@@ -102,7 +108,6 @@ func player_attack():
 	if Input.is_action_just_pressed("attack"):
 		global.player_atk_rn = true
 		atk_prog = true
-		health+=10
 		match (dir):
 			"right":
 				$AnimatedSprite2D.flip_h=true;

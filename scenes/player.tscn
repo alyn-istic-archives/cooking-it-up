@@ -342,7 +342,7 @@ animations = [{
 radius = 31.1448
 
 [node name="player" type="CharacterBody2D" unique_id=375395072]
-z_index = 1
+z_as_relative = false
 y_sort_enabled = true
 position = Vector2(107, 91)
 collision_layer = 2
@@ -355,6 +355,8 @@ position = Vector2(-1, -1)
 shape = SubResource("CircleShape2D_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=460199272]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_bwjto")
 animation = &"front_idle"

@@ -25,10 +25,33 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjlyf"]
+atlas = ExtResource("2_gjlyf")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eo5op"]
+atlas = ExtResource("2_gjlyf")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5afm8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjlyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eo5op")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
 [node name="CookingScene" type="CanvasLayer" unique_id=2093729249]
 script = ExtResource("1_gl1qf")
 
 [node name="RecipePanel" type="Panel" parent="." unique_id=1076482013]
+visible = false
 offset_right = 1178.0
 offset_bottom = 657.0
 
@@ -41,6 +64,7 @@ offset_bottom = 164.0
 
 [node name="skip" type="Button" parent="RecipePanel/VBoxContainer" unique_id=1561419888]
 layout_mode = 2
+action_mode = 0
 text = "SKIP"
 alignment = 2
 
@@ -75,8 +99,8 @@ text_overrun_behavior = 2
 visible = false
 offset_left = -11.0
 offset_top = -2.0
-offset_right = 1154.0
-offset_bottom = 639.0
+offset_right = 1431.0
+offset_bottom = 880.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MinigamePanel" unique_id=1392287607]
 position = Vector2(603.0001, 207.00009)
@@ -101,20 +125,28 @@ max_value = 5.0
 
 [node name="CHOP" type="Button" parent="MinigamePanel/VBoxContainer" unique_id=720352016]
 layout_mode = 2
+action_mode = 0
 text = "CHOP
 "
 
 [node name="ResultPanel" type="Panel" parent="." unique_id=300415917]
 visible = false
-offset_left = 495.0
+offset_left = 455.0
 offset_top = 168.0
-offset_right = 703.0
+offset_right = 693.0
 offset_bottom = 408.0
+
+[node name="dish" type="AnimatedSprite2D" parent="ResultPanel" unique_id=922600046]
+position = Vector2(120.000015, 149)
+scale = Vector2(3.208334, 2.9687502)
+sprite_frames = SubResource("SpriteFrames_5afm8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ResultPanel" unique_id=1599706073]
 layout_mode = 0
-offset_right = 206.0
-offset_bottom = 247.0
+offset_left = 11.0
+offset_top = 10.0
+offset_right = 217.0
+offset_bottom = 114.0
 
 [node name="BuffLabel" type="Label" parent="ResultPanel/VBoxContainer" unique_id=1186205640]
 layout_mode = 2
@@ -130,6 +162,73 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "EAT ITEM"
 
+[node name="WashPanel" type="Panel" parent="." unique_id=342459069]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 269.0
+offset_bottom = 316.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="WashPanel" unique_id=1920172302]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WashPanel" unique_id=715688933]
+layout_mode = 0
+offset_top = 294.0
+offset_right = 1144.0
+offset_bottom = 528.0
+
+[node name="ProgressBar" type="ProgressBar" parent="WashPanel/VBoxContainer" unique_id=2097318377]
+layout_mode = 2
+
+[node name="Instruction" type="Label" parent="WashPanel/VBoxContainer" unique_id=1601126009]
+layout_mode = 2
+text = "wash it up
+"
+horizontal_alignment = 1
+
+[node name="Wash" type="Button" parent="WashPanel/VBoxContainer" unique_id=393684011]
+layout_mode = 2
+text = "WASH
+"
+
+[node name="CookPanel" type="Panel" parent="." unique_id=565114598]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 226.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CookPanel" unique_id=1303702817]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CookPanel" unique_id=1637100043]
+layout_mode = 0
+offset_top = 299.0
+offset_right = 1150.0
+offset_bottom = 479.0
+
+[node name="Instruction" type="Label" parent="CookPanel/VBoxContainer" unique_id=1181308041]
+layout_mode = 2
+text = "flip ts"
+
+[node name="FLIP" type="Button" parent="CookPanel/VBoxContainer" unique_id=1098354687]
+layout_mode = 2
+text = "FLIP
+"
+
+[node name="FlipBar" type="ProgressBar" parent="CookPanel/VBoxContainer" unique_id=2019458625]
+layout_mode = 2
+
+[node name="ZoneIndicator" type="ColorRect" parent="CookPanel/VBoxContainer" unique_id=928007139]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
 [connection signal="pressed" from="RecipePanel/VBoxContainer/skip" to="." method="_on_skip_button_pressed"]
 [connection signal="pressed" from="MinigamePanel/VBoxContainer/CHOP" to="." method="_on_chop_pressed"]
 [connection signal="pressed" from="ResultPanel/VBoxContainer/EAT" to="." method="_on_eat_pressed"]
+[connection signal="pressed" from="WashPanel/VBoxContainer/Wash" to="." method="_on_wash_pressed"]
+[connection signal="pressed" from="CookPanel/VBoxContainer/FLIP" to="." method="_on_flip_pressed"]

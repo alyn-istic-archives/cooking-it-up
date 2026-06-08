@@ -74,8 +74,7 @@ shape = SubResource("CircleShape2D_4ra3w")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1420902746]
 sprite_frames = SubResource("SpriteFrames_ipns3")
 animation = &"walk"
-frame = 1
-frame_progress = 0.00210737
+frame_progress = 0.08546257
 
 [node name="detection_area" type="Area2D" parent="." unique_id=1054967552]
 visible = false

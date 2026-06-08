@@ -9,14 +9,17 @@ var ingredients: Dictionary = {}
 const COOK_TRIG_COUNT = 3
 var current_count = 0
 
+
+var max_health: int = 100
 var bonus_health: int = 0
+var max_atk: int = 20
 var bonus_atk: int = 0
 
 var ING_POOL = [
-	{"name": "Lettuce", "rarity": "common"},
-	{"name": "Tomato", "rarity": "common"},
-	{"name": "Ham", "rarity": "rare"},
-	{"name": "Bread", "rarity": "rare"},
+	{"name": "Lettuce", "rarity": "common", "type": "vegetable"},
+	{"name": "Tomato", "rarity": "common", "type": "vegetable"},
+	{"name": "Meat", "rarity": "rare", "type": "meat"},
+	{"name": "Bread", "rarity": "rare", "type": "other"},
 ]
 
 const RECIPES = [
@@ -24,7 +27,7 @@ const RECIPES = [
 	"name":"Salad",
 	"needs": {"Lettuce":1, "Tomato":1},
 	"buff":{"max_health":0, "attack":5},
-	"description": "+5 health", "chops_required": 2
+	"description": "+5 attack", "chops_required": 2
 	},
 	{
 	"name":"Sandwich",
@@ -41,6 +44,12 @@ func add_ingredient(ingredient_name: String)-> void:
 	else:
 		ingredients[ingredient_name]=1
 		current_count +=1
+
+func get_ingredient_type(ing_name: String) -> String:
+	for ing in ING_POOL:
+		if ing["name"] == ing_name:
+			return ing.get("type", "other")
+	return "other"
 
 func total_ingredients() -> int:
 	var total = 0
@@ -67,8 +76,13 @@ func roll_gacha() -> Dictionary:
 	if pool.is_empty():
 		pool = ING_POOL 
 	return pool[randi() % pool.size()]
-	
+
+func update_player_buff():
+	max_atk += bonus_atk
+	max_health += bonus_health
+	print("max attack:", max_atk)
+	print("max health:", max_health)
 func apply_dish_buff(recipe: Dictionary) -> void:
 	var buff = recipe["buff"]
-	bonus_health += buff["max_health"]
-	bonus_atk += buff["attack"]
+	bonus_health = buff["max_health"]
+	bonus_atk = buff["attack"]

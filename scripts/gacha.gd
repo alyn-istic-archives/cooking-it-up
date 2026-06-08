@@ -14,21 +14,13 @@ func _ready() -> void:
 	_roll_animation()# Replace with function body.
 
 func _roll_animation()-> void:
-	#$Panel/ResultLabel.text = "rolling..."
-	#$Panel/ResultLabel.visible = true
-	#$Panel/ItemNameLabel.visible = false
-	#$Panel/RarityLabel.visible = false
-	#$Panel/ContinueButton.visible = false
-#
-	#$Animation.player.play("roll_spin")
-	#await get_tree().create_timer(1.8).timeout
-	#_result()
+
 	
 	#func _play_roll_animation() -> void:
 	$Panel/VBoxContainer/ResultLabel.text = "Rolling..."
 	$Panel/VBoxContainer/ItemNameLabel.visible = false
 	$Panel/VBoxContainer/RarityLabel.visible = false
-	$Panel/VBoxContainer/ContinueButton.visible = false
+	$Panel/ContinueButton.visible = false
 	$Panel/VBoxContainer/Sprite.visible = false
 	# Fake spinning text
 	for i in range(8):
@@ -39,7 +31,6 @@ func _roll_animation()-> void:
 	_result()
 	
 func _result() -> void:
-	$AnimationPlayer.play("reveal")
 	
 	$Panel/VBoxContainer/ResultLabel.text = "You got:"
 	$Panel/VBoxContainer/ItemNameLabel.text = result["name"]
@@ -56,12 +47,12 @@ func _result() -> void:
 		"common":    $Panel/VBoxContainer/RarityLabel.add_theme_color_override("font_color", Color.WHITE)
 		"rare":      $Panel/VBoxContainer/RarityLabel.add_theme_color_override("font_color", Color.CYAN)
 	await get_tree().create_timer(0.5).timeout
-	$Panel/VBoxContainer/ContinueButton.visible = true
+	$Panel/ContinueButton.visible = true
 	can_dismiss = true
 
 	
 func _input(event: InputEvent)-> void:
-	if can_dismiss and event.is_action_pressed("ui_accept"):
+	if can_dismiss and event.is_action_pressed("continue") and $Panel/ContinueButton.visible == true:
 		_on_continue_button_pressed()
 		# Called every frame. 'delta' is the elapsed time since the previous frame.
 
@@ -74,8 +65,8 @@ func _on_continue_button_pressed() -> void:
 	if can_dismiss:
 		$Panel/VBoxContainer/ItemNameLabel.visible = false
 		$Panel/VBoxContainer/RarityLabel.visible = false
-		$Panel/VBoxContainer/ContinueButton.visible = false
-		$Panel/VBoxContainer/ContinueButton.visible = false
+		$Panel/ContinueButton.visible = false
+		$Panel/ContinueButton.visible = false
 		$Panel/VBoxContainer/Sprite.visible = false
 		$Panel.visible = false
 		signalBus.gacha_end.emit(result)

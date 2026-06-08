@@ -53,7 +53,7 @@ func _on_hitbox_body_exited(body: Node2D) -> void:
 
 func damage_dealt():
 	if player_in_range and global.player_atk_rn and taking_damage == true:
-		health-=20
+		health-=(global.max_atk)
 		$hurt_cooldown.start()
 		taking_damage = false
 		print("slime health =", health)

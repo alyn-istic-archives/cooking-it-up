@@ -3,6 +3,7 @@ extends Node2D
 @export var enemy_scene: PackedScene
 @export var gacha_scene: PackedScene
 @export var cooking_scene: PackedScene
+@export var player_scene: PackedScene
 
 
 
@@ -30,7 +31,6 @@ func _ready() -> void:
 
 	
 func _on_enemy_died() -> void:
-	print("dead enemy method")
 	get_tree().paused = true
 	
 	var gacha = gacha_scene.instantiate()
@@ -58,7 +58,7 @@ func position_next_wave():
 	if current_nodes == start_nodes:
 		if current_wave != 0:
 			global.next_wave = true
-		$SceneTransitionAnimation/animation_player.play("between_wave")
+		$SceneTransitionAnimation/animation_player.play("scene_change")
 		current_wave +=1
 		global.current_wave = current_wave
 		get_tree().create_timer(0.5)
@@ -76,5 +76,5 @@ func _on_enemy_respawn_timeout() -> void:
 		e_scene.enemy_died.connect(_on_enemy_died)
 		add_child(e_scene)
 		enemy_present = 1
-		e_scene.global_position= Vector2( -50, 100)
+		e_scene.global_position= Vector2( 50, 150)
 	
