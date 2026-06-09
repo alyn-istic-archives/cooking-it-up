@@ -11,6 +11,8 @@ var taking_damage = true
 signal enemy_died(enemy_position: Vector2)
 
 func _physics_process(_delta):
+	$HEALTH.max_value = health
+	$HEALTH.value = health
 	damage_dealt()
 	if player_chase and is_instance_valid(player):
 		var dir = (player.position-position).normalized()

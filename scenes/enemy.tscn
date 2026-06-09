@@ -68,13 +68,18 @@ collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_7p1mj")
 
+[node name="HEALTH" type="ProgressBar" parent="." unique_id=690275170]
+offset_right = 4.0
+offset_bottom = 4.0
+show_percentage = false
+
 [node name="interaction" type="CollisionShape2D" parent="." unique_id=1021926442]
 shape = SubResource("CircleShape2D_4ra3w")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1420902746]
 sprite_frames = SubResource("SpriteFrames_ipns3")
 animation = &"walk"
-frame_progress = 0.08546257
+frame_progress = 0.9804011
 
 [node name="detection_area" type="Area2D" parent="." unique_id=1054967552]
 visible = false

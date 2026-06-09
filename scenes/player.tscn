@@ -335,7 +335,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"side_walk",
-"speed": 5.0
+"speed": 6.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
@@ -351,28 +351,39 @@ motion_mode = 1
 script = ExtResource("1_g2els")
 
 [node name="interaction" type="CollisionShape2D" parent="." unique_id=710192374]
+visible = false
 position = Vector2(-1, -1)
 shape = SubResource("CircleShape2D_g2els")
+
+[node name="HEALTH" type="ProgressBar" parent="." unique_id=1562304627]
+offset_left = -1.0
+offset_top = -18.0
+offset_right = 3.0
+offset_bottom = 9.0
+show_percentage = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=460199272]
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_bwjto")
-animation = &"front_idle"
+animation = &"side_idle"
+frame = 5
+frame_progress = 0.07895402
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=605110833]
 position = Vector2(1, 2)
 zoom = Vector2(5, 5)
-limit_left = -100
+limit_left = 0
 limit_top = 0
-limit_right = 440
-limit_bottom = 192
+limit_right = 540
+limit_bottom = 210
 limit_smoothed = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="hitbox" type="Area2D" parent="." unique_id=1885949457]
+visible = false
 collision_layer = 8
 collision_mask = 4
 

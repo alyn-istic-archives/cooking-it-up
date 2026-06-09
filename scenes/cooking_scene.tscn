@@ -175,8 +175,9 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="WashPanel" unique_id=715688933]
 layout_mode = 0
+offset_left = 331.0
 offset_top = 294.0
-offset_right = 1144.0
+offset_right = 833.0
 offset_bottom = 528.0
 
 [node name="ProgressBar" type="ProgressBar" parent="WashPanel/VBoxContainer" unique_id=2097318377]
@@ -194,7 +195,6 @@ text = "WASH
 "
 
 [node name="CookPanel" type="Panel" parent="." unique_id=565114598]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -207,8 +207,9 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CookPanel" unique_id=1637100043]
 layout_mode = 0
-offset_top = 299.0
-offset_right = 1150.0
+offset_left = 344.0
+offset_top = 256.0
+offset_right = 816.0
 offset_bottom = 479.0
 
 [node name="Instruction" type="Label" parent="CookPanel/VBoxContainer" unique_id=1181308041]

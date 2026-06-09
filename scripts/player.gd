@@ -18,6 +18,8 @@ func _ready() -> void:
 	signalBus.enemy_died.connect(_on_enemy_died)
 
 func _physics_process(_delta):
+	$HEALTH.max_value = global.max_health
+	$HEALTH.value = health
 	player_movement(_delta)
 	damage_dealt()
 	player_attack()

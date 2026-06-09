@@ -27,13 +27,13 @@ const RECIPES = [
 	"name":"Salad",
 	"needs": {"Lettuce":1, "Tomato":1},
 	"buff":{"max_health":0, "attack":5},
-	"description": "+5 attack", "chops_required": 2
+	"description": "+5 attack"
 	},
 	{
 	"name":"Sandwich",
-	"needs": {"Lettuce":1, "Tomato":1, "Ham": 1, "Bread": 2},
+	"needs": {"Lettuce":1, "Tomato":1, "Meat": 1},
 	"buff":{"max_health":5, "attack":10},
-	"description": "+5 health, +10 attack", "chops_required": 3
+	"description": "+5 health, +10 attack"
 	}
 ]
 

@@ -39,6 +39,7 @@ func _show_recipe_select() -> void:
 	$RecipePanel.visible = true
 	$MinigamePanel.visible = false
 	$ResultPanel.visible = false
+	$WashPanel.visible = false
 	$CookPanel.visible = false
 	
 	# Clear old buttons
@@ -129,19 +130,20 @@ func _on_wash_pressed() -> void:
 	if tap_count >= TAPS_NEEDED:
 		$WashPanel/VBoxContainer/Instruction.text = "All clean!"
 		await get_tree().create_timer(0.8).timeout
+		tap_count = 0
 		_next_task()
 
 
 func _start_chop() -> void:
-	current_phase = Phase.COOK
+	current_phase = Phase.CHOP
 	
 	$RecipePanel.visible = false
 	$MinigamePanel.visible = true
 	$CookPanel.visible = false
+	$WashPanel.visible = false
 	$ResultPanel.visible = false
 	
-	$MinigamePanel/VBoxContainer/Instruction.text = \
-	"Chop the ingredient! Press [Space] or tap" % current_task["ingredient"]
+	$MinigamePanel/VBoxContainer/Instruction.text = "Chop the ingredient! Press [Space] or tap"
 	$MinigamePanel/VBoxContainer/ProgressBar.max_value = TAPS_NEEDED
 	$MinigamePanel/VBoxContainer/ProgressBar.value = 0
 	$MinigamePanel/VBoxContainer/CHOP.visible = true
@@ -170,6 +172,7 @@ func _on_chop_pressed() -> void:
 		$MinigamePanel/VBoxContainer/Instruction.text = "All chopped!"
 		$MinigamePanel/VBoxContainer/CHOP.visible = false
 		await get_tree().create_timer(0.8).timeout
+		tap_count = 1
 		_next_task()
 	
 	# Screenshake / sound can be triggered here
@@ -187,7 +190,7 @@ func _start_cook() -> void:
 	
 	$CookPanel/VBoxContainer/Instruction.text = \
 	"cook the %s !\n Flip it in the middle!" % current_task["ingredient"]
-	$CookPanel/VBoxContainer.FLIP.visible = true
+	$CookPanel/VBoxContainer/FLIP.visible = true
 	$CookPanel/AnimatedSprite2D.play("default")
 	
 func _process (delta: float)-> void:
@@ -203,7 +206,7 @@ func _process (delta: float)-> void:
 	$CookPanel/VBoxContainer/FlipBar.value = flip_marker_pos*100
 	
 	var in_zone = flip_marker_pos >= flip_zone_min and flip_marker_pos <= flip_zone_max
-	$CookPanel/VBoxContainer/ZoneIindicator.modulate = Color.GREEN if in_zone else Color.RED
+	$CookPanel/VBoxContainer/ZoneIndicator.modulate = Color.GREEN if in_zone else Color.RED
 	
 
 func _on_flip_pressed() -> void:
