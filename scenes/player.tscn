@@ -356,31 +356,22 @@ position = Vector2(-1, -1)
 shape = SubResource("CircleShape2D_g2els")
 
 [node name="HEALTH" type="ProgressBar" parent="." unique_id=1562304627]
-offset_left = -1.0
-offset_top = -18.0
-offset_right = 3.0
-offset_bottom = 9.0
+modulate = Color(0, 1, 0, 1)
+offset_left = -12.999998
+offset_top = 6.9999986
+offset_right = 267.00006
+offset_bottom = 56.999878
+scale = Vector2(0.1, 0.1)
 show_percentage = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=460199272]
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(0, -6)
+position = Vector2(2, -18)
 sprite_frames = SubResource("SpriteFrames_bwjto")
 animation = &"side_idle"
 frame = 5
 frame_progress = 0.07895402
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=605110833]
-position = Vector2(1, 2)
-zoom = Vector2(5, 5)
-limit_left = 0
-limit_top = 0
-limit_right = 540
-limit_bottom = 210
-limit_smoothed = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 
 [node name="hitbox" type="Area2D" parent="." unique_id=1885949457]
 visible = false
@@ -396,6 +387,19 @@ wait_time = 1.5
 
 [node name="deal_atk_timer" type="Timer" parent="." unique_id=1783992083]
 wait_time = 0.75
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1112616959]
+zoom = Vector2(3, 3)
+limit_left = 0
+limit_top = 0
+limit_right = 650
+limit_bottom = 300
+limit_smoothed = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="." unique_id=407022771]
+remote_path = NodePath("../Camera2D")
 
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]

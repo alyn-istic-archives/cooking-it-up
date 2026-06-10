@@ -14,6 +14,7 @@ var current_nodes: int
 var wave_over
 var enemy_present= 1
 
+var cooking_open:= false 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -45,13 +46,9 @@ func _on_gacha_end(ingredient:Dictionary) ->void:
 	get_tree().paused = false
 	print(ingredient["name"])
 	
-	if global.current_count == global.COOK_TRIG_COUNT:
-		await get_tree().create_timer(0.3).timeout
-		get_tree().paused = true
-		var cooking = cooking_scene.instantiate()
-		cooking.cooking_done.connect(_on_cooking_end)
-		add_child(cooking)
+	
 func _on_cooking_end() -> void:
+	cooking_open = false
 	get_tree().paused = false
 	
 func position_next_wave():
@@ -67,6 +64,13 @@ func position_next_wave():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("recipe") and not cooking_open:
+		cooking_open = true
+		await get_tree().create_timer(0.3).timeout
+		get_tree().paused = true
+		var cooking = cooking_scene.instantiate()
+		cooking.cooking_done.connect(_on_cooking_end)
+		add_child(cooking)
 	pass
 
 

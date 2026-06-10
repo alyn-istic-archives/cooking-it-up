@@ -33,22 +33,22 @@ func _on_enemy_died():
 	health = global.max_health
 	print("player health:", health)
 func player_movement(_delta):
-	if (Input.is_action_pressed("ui_right")):
+	if (Input.is_action_pressed("right")):
 		play_anim(1)
 		direction = "right"
 		velocity.x = speed
 		velocity.y = 0
-	elif (Input.is_action_pressed("ui_left")):
+	elif (Input.is_action_pressed("left")):
 		play_anim(1)
 		direction = "left"
 		velocity.x = -speed
 		velocity.y = 0
-	elif (Input.is_action_pressed("ui_up")):
+	elif (Input.is_action_pressed("up")):
 		play_anim(1)
 		direction = "up"
 		velocity.x = 0
 		velocity.y = -speed
-	elif (Input.is_action_pressed("ui_down")):
+	elif (Input.is_action_pressed("down")):
 		play_anim(1)
 		direction = "down"
 		velocity.x = 0

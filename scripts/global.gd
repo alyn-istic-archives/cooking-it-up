@@ -6,9 +6,6 @@ var next_wave: bool
 
 var ingredients: Dictionary = {}
 
-const COOK_TRIG_COUNT = 3
-var current_count = 0
-
 
 var max_health: int = 100
 var bonus_health: int = 0
@@ -40,10 +37,10 @@ const RECIPES = [
 func add_ingredient(ingredient_name: String)-> void:
 	if ingredients.has(ingredient_name):
 		ingredients[ingredient_name]+=1
-		current_count+=1
+
 	else:
 		ingredients[ingredient_name]=1
-		current_count +=1
+
 
 func get_ingredient_type(ing_name: String) -> String:
 	for ing in ING_POOL:

@@ -1,74 +1,198 @@
 [gd_scene format=3 uid="uid://ilv08b12mfm8"]
 
 [ext_resource type="Script" uid="uid://6y2v83qfywu7" path="res://scripts/gacha.gd" id="1_j7t8q"]
-[ext_resource type="Texture2D" uid="uid://cjoicp4y5tgwh" path="res://art/enemy.png" id="2_ocqmj"]
+[ext_resource type="Texture2D" uid="uid://bhefkddkcp6ar" path="res://art/misc.png" id="2_3cm48"]
 [ext_resource type="PackedScene" uid="uid://yfllgmt88b8o" path="res://scenes/SceneTransitionAnimation.tscn" id="3_3cm48"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3cm48"]
-atlas = ExtResource("2_ocqmj")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks0hb"]
+atlas = ExtResource("2_3cm48")
 region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ks0hb"]
-atlas = ExtResource("2_ocqmj")
-region = Rect2(192, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5vhwk"]
-atlas = ExtResource("2_ocqmj")
+[sub_resource type="AtlasTexture" id="AtlasTexture_my3l4"]
+atlas = ExtResource("2_3cm48")
 region = Rect2(48, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_my3l4"]
-atlas = ExtResource("2_ocqmj")
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vhwk"]
+atlas = ExtResource("2_3cm48")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t138g"]
-atlas = ExtResource("2_ocqmj")
+atlas = ExtResource("2_3cm48")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2w2d2"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc1h7"]
+atlas = ExtResource("2_3cm48")
 region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20vrv"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_567ds"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukre1"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(96, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h41sj"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(144, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g24nf"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(192, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyiya"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(240, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otsrf"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(0, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2dtl"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(48, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_poex1"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(96, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uj8b"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(144, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84yib"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(192, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsknb"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(240, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ptk0"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(0, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3odj"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(48, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4xwg"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(96, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2txf"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(144, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ex02"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(192, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30xe7"]
+atlas = ExtResource("2_3cm48")
+region = Rect2(240, 288, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2w2d2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3cm48")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ks0hb")
-}],
-"loop": true,
-"name": &"Bread",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3cm48")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5vhwk")
-}],
-"loop": true,
-"name": &"Lettuce",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3cm48")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_my3l4")
-}],
-"loop": true,
-"name": &"Meat",
-"speed": 5.0
 }, {
-"frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3cm48")
+"texture": SubResource("AtlasTexture_5vhwk")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t138g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2w2d2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rc1h7")
+}],
+"loop": true,
+"name": &"Bread",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20vrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_567ds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukre1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h41sj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g24nf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyiya")
+}],
+"loop": true,
+"name": &"Lettuce",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otsrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2dtl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_poex1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2uj8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84yib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsknb")
+}],
+"loop": true,
+"name": &"Meat",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ptk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3odj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4xwg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2txf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ex02")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30xe7")
 }],
 "loop": true,
 "name": &"Tomato",
-"speed": 5.0
+"speed": 6.0
 }]
 
 [node name="GachaScene" type="CanvasLayer" unique_id=1084116209]
@@ -88,12 +212,18 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -36.0
-offset_top = 115.0
-offset_right = -36.0
-offset_bottom = -17.0
+offset_top = 153.0
+offset_bottom = -309.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Panel/VBoxContainer" unique_id=1521851597]
+position = Vector2(571.00006, 228)
+scale = Vector2(3.5208337, 3.2395835)
+sprite_frames = SubResource("SpriteFrames_2w2d2")
+animation = &"Tomato"
+frame = 2
+frame_progress = 0.25039154
 
 [node name="ResultLabel" type="Label" parent="Panel/VBoxContainer" unique_id=929662516]
 layout_mode = 2
@@ -113,20 +243,10 @@ text = "RARITY:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite" type="AnimatedSprite2D" parent="Panel/VBoxContainer" unique_id=1521851597]
-position = Vector2(584, 194)
-scale = Vector2(4.625, 4.1875)
-sprite_frames = SubResource("SpriteFrames_2w2d2")
-animation = &"Meat"
-
-[node name="ContinueButton" type="Button" parent="Panel" unique_id=1761331059]
+[node name="ContinueButton" type="Button" parent="Panel/VBoxContainer" unique_id=1761331059]
 process_mode = 3
 custom_minimum_size = Vector2(175, 70)
-layout_mode = 0
-offset_left = 370.0
-offset_top = 420.0
-offset_right = 737.0
-offset_bottom = 500.0
+layout_mode = 2
 size_flags_horizontal = 4
 action_mode = 0
 text = "[press f to continue]"
@@ -135,4 +255,4 @@ text = "[press f to continue]"
 visible = false
 position = Vector2(0, 116)
 
-[connection signal="pressed" from="Panel/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

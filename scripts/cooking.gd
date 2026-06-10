@@ -28,6 +28,17 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_show_recipe_select()
 
+func _input(event: InputEvent):
+	if  event.is_action_pressed("action"):
+		if $MinigamePanel.visible == true:
+			_on_chop_pressed()
+		elif $WashPanel.visible == true:
+			_on_wash_pressed()
+		elif $CookPanel.visible == true:
+			_on_flip_pressed()
+		else:
+			pass
+	
 
 
 # ── Phase 1: Recipe Selection ─────────────────────────────────────────
@@ -44,7 +55,7 @@ func _show_recipe_select() -> void:
 	
 	# Clear old buttons
 	for child in $RecipePanel/VBoxContainer/recipe_list.get_children():
-		child.queue_free()
+		child.free()
 	
 	var any_available = false
 	for recipe in global.RECIPES:
@@ -63,8 +74,7 @@ func _show_recipe_select() -> void:
 	
 	$RecipePanel/VBoxContainer/skip.visible = true
 	
-	global.current_count=0
-	
+
 
 
 func _can_cook(recipe: Dictionary) -> bool:
@@ -116,16 +126,18 @@ func _start_wash() -> void:
 	$CookPanel.visible = false
 	$ResultPanel.visible = false
 	
+	$WashPanel/VBoxContainer/ingredient.play(current_task["ingredient"])
 	$WashPanel/VBoxContainer/Instruction.text = \
-	"Wash the %s!\nPress [Space] or tap rapidly!"% current_task["ingredient"]
+	"Wash the %s!\nPress [Q] or tap rapidly!"% current_task["ingredient"]
 	$WashPanel/VBoxContainer/ProgressBar.max_value = TAPS_NEEDED
 	$WashPanel/VBoxContainer/ProgressBar.value = 0
-	$WashPanel/AnimatedSprite2D.play("default")
+
 
 func _on_wash_pressed() -> void:
 	if current_phase != Phase.WASH:
 		return
 	tap_count +=1
+	$WashPanel/VBoxContainer/wash.play("wash")
 	$WashPanel/VBoxContainer/ProgressBar.value = tap_count
 	if tap_count >= TAPS_NEEDED:
 		$WashPanel/VBoxContainer/Instruction.text = "All clean!"
@@ -143,16 +155,17 @@ func _start_chop() -> void:
 	$WashPanel.visible = false
 	$ResultPanel.visible = false
 	
-	$MinigamePanel/VBoxContainer/Instruction.text = "Chop the ingredient! Press [Space] or tap"
+	$MinigamePanel/VBoxContainer/Instruction.text = \
+	"Chop the %s! \nPress [Q] or tap" % current_task["ingredient"]
 	$MinigamePanel/VBoxContainer/ProgressBar.max_value = TAPS_NEEDED
 	$MinigamePanel/VBoxContainer/ProgressBar.value = 0
 	$MinigamePanel/VBoxContainer/CHOP.visible = true
 	
 	# Animate the ingredient sprite bobbing
-	$MinigamePanel/AnimatedSprite2D.visible = true
-	$MinigamePanel/AnimatedSprite2D.play("default")
+	$MinigamePanel/VBoxContainer/AnimatedSprite2D.visible = true
+	$MinigamePanel/VBoxContainer/AnimatedSprite2D.play(current_task["ingredient"])
 
-			
+
 
 func _finish_minigame() -> void:
 	#$MinigamePanel/AnimationPlayer.play("cooking_complete")
@@ -172,7 +185,7 @@ func _on_chop_pressed() -> void:
 		$MinigamePanel/VBoxContainer/Instruction.text = "All chopped!"
 		$MinigamePanel/VBoxContainer/CHOP.visible = false
 		await get_tree().create_timer(0.8).timeout
-		tap_count = 1
+		tap_count = 0
 		_next_task()
 	
 	# Screenshake / sound can be triggered here
@@ -191,7 +204,7 @@ func _start_cook() -> void:
 	$CookPanel/VBoxContainer/Instruction.text = \
 	"cook the %s !\n Flip it in the middle!" % current_task["ingredient"]
 	$CookPanel/VBoxContainer/FLIP.visible = true
-	$CookPanel/AnimatedSprite2D.play("default")
+	$CookPanel/AnimatedSprite2D.play(current_task["ingredient"])
 	
 func _process (delta: float)-> void:
 	if current_phase != Phase.COOK or flip_done:
@@ -233,8 +246,8 @@ func _show_eat_result() -> void:
 	$WashPanel.visible = false
 	$CookPanel.visible = false
 	
-	$ResultPanel/dish.visible = true
-	$ResultPanel/dish.play("default")
+	$ResultPanel/VBoxContainer/dish.visible = true
+	$ResultPanel/VBoxContainer/dish.play(selected_recipe["name"])
 	
 	$ResultPanel/VBoxContainer/DishNameLabel.text = selected_recipe["name"]
 	$ResultPanel/VBoxContainer/BuffLabel.text = "Buff gained:\n" + selected_recipe["description"]
