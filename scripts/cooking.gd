@@ -164,6 +164,9 @@ func _start_chop() -> void:
 	# Animate the ingredient sprite bobbing
 	$MinigamePanel/VBoxContainer/AnimatedSprite2D.visible = true
 	$MinigamePanel/VBoxContainer/AnimatedSprite2D.play(current_task["ingredient"])
+	
+	$MinigamePanel/VBoxContainer/chop.visible = true
+	$MinigamePanel/VBoxContainer/chop.play("default")
 
 
 
@@ -202,9 +205,9 @@ func _start_cook() -> void:
 	$ResultPanel.visible = false
 	
 	$CookPanel/VBoxContainer/Instruction.text = \
-	"cook the %s !\n Flip it in the middle!" % current_task["ingredient"]
+	"Cook the %s !\n Flip it in the middle!" % current_task["ingredient"]
 	$CookPanel/VBoxContainer/FLIP.visible = true
-	$CookPanel/AnimatedSprite2D.play(current_task["ingredient"])
+
 	
 func _process (delta: float)-> void:
 	if current_phase != Phase.COOK or flip_done:
@@ -220,7 +223,10 @@ func _process (delta: float)-> void:
 	
 	var in_zone = flip_marker_pos >= flip_zone_min and flip_marker_pos <= flip_zone_max
 	$CookPanel/VBoxContainer/ZoneIndicator.modulate = Color.GREEN if in_zone else Color.RED
-	
+	if in_zone:
+		$CookPanel/AnimatedSprite2D.play("low_heat")
+	else:
+		$CookPanel/AnimatedSprite2D.play("high_heat")
 
 func _on_flip_pressed() -> void:
 	if current_phase != Phase.COOK or flip_done:

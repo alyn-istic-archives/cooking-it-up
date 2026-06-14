@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://diwqd0oyb0g06" path="res://scripts/cooking.gd" id="1_gl1qf"]
 [ext_resource type="Texture2D" uid="uid://bhefkddkcp6ar" path="res://art/misc.png" id="3_0mfq7"]
+[ext_resource type="Texture2D" uid="uid://c18rfa48cq72x" path="res://art/more_misc.png" id="3_1cens"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gjlyf"]
 atlas = ExtResource("3_0mfq7")
@@ -97,6 +98,56 @@ animations = [{
 }],
 "loop": true,
 "name": &"Tomato",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2xat"]
+atlas = ExtResource("3_1cens")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdd21"]
+atlas = ExtResource("3_1cens")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crb31"]
+atlas = ExtResource("3_1cens")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6e81"]
+atlas = ExtResource("3_1cens")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk001"]
+atlas = ExtResource("3_1cens")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qv7w"]
+atlas = ExtResource("3_1cens")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ra3d6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2xat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdd21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crb31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6e81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk001")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qv7w")
+}],
+"loop": true,
+"name": &"default",
 "speed": 6.0
 }]
 
@@ -302,6 +353,103 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcc7g"]
+atlas = ExtResource("3_1cens")
+region = Rect2(48, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atn4y"]
+atlas = ExtResource("3_1cens")
+region = Rect2(96, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljcq3"]
+atlas = ExtResource("3_1cens")
+region = Rect2(144, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvcqk"]
+atlas = ExtResource("3_1cens")
+region = Rect2(192, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ly0i"]
+atlas = ExtResource("3_1cens")
+region = Rect2(144, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt27k"]
+atlas = ExtResource("3_1cens")
+region = Rect2(192, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixg51"]
+atlas = ExtResource("3_1cens")
+region = Rect2(48, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssusi"]
+atlas = ExtResource("3_1cens")
+region = Rect2(96, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jv45c"]
+atlas = ExtResource("3_1cens")
+region = Rect2(144, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kc5qr"]
+atlas = ExtResource("3_1cens")
+region = Rect2(192, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5suvi"]
+atlas = ExtResource("3_1cens")
+region = Rect2(240, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocrgb"]
+atlas = ExtResource("3_1cens")
+region = Rect2(0, 288, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1cens"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcc7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atn4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljcq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvcqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ly0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rt27k")
+}],
+"loop": true,
+"name": &"high_heat",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixg51")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssusi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jv45c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kc5qr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5suvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocrgb")
+}],
+"loop": true,
+"name": &"low_heat",
+"speed": 6.0
+}]
+
 [node name="CookingScene" type="CanvasLayer" unique_id=2093729249]
 script = ExtResource("1_gl1qf")
 
@@ -331,7 +479,6 @@ text = "RECIPES:"
 layout_mode = 2
 
 [node name="MinigamePanel" type="Panel" parent="." unique_id=29601601]
-visible = false
 offset_left = -11.0
 offset_top = -2.0
 offset_right = 1431.0
@@ -365,6 +512,11 @@ sprite_frames = SubResource("SpriteFrames_eo5op")
 animation = &"Tomato"
 frame = 2
 frame_progress = 0.0051607885
+
+[node name="chop" type="AnimatedSprite2D" parent="MinigamePanel/VBoxContainer" unique_id=150096520]
+position = Vector2(210, -148)
+scale = Vector2(6.687501, 5.0000005)
+sprite_frames = SubResource("SpriteFrames_ra3d6")
 
 [node name="ResultPanel" type="Panel" parent="." unique_id=300415917]
 visible = false
@@ -458,6 +610,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CookPanel" unique_id=1303702817]
+position = Vector2(598.00006, 149.00002)
+scale = Vector2(4.2916665, 3.5416667)
+sprite_frames = SubResource("SpriteFrames_1cens")
+animation = &"low_heat"
+frame = 4
+frame_progress = 0.9306033
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CookPanel" unique_id=1637100043]
 layout_mode = 0
